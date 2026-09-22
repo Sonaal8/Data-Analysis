@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 SQL Interview Questions — Sonaal Topno</title>
+<style>
+:root {
+  --bg: #f4f6f9; --card: #fff; --text: #1e293b; --muted: #64748b;
+  --accent: #1a4d7c; --accent-light: #e8f0f8;
+  --easy: #059669; --medium: #d97706; --hard: #dc2626;
+  --border: #e2e8f0; --sql-bg: #0f172a; --sql-text: #e2e8f0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
+header { background: linear-gradient(135deg, #1a4d7c 0%, #2c5282 100%); color: #fff; padding: 36px 20px; margin-bottom: 28px; }
+header .container { padding: 0 20px; }
+header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 6px; }
+header p { opacity: 0.9; font-size: 0.95rem; }
+.toc { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; }
+.toc h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 12px; }
+.toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.toc a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.toc a:hover { text-decoration: underline; }
+.toc-count { color: var(--muted); font-size: 0.85rem; }
+.schema { background: var(--sql-bg); color: var(--sql-text); border-radius: 8px; padding: 16px; margin-bottom: 28px; font-family: 'Consolas', monospace; font-size: 0.8rem; overflow-x: auto; }
+.schema .label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; font-family: 'Segoe UI', sans-serif; }
+.category { margin-bottom: 32px; }
+.category > h2 { font-size: 1.35rem; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 16px; }
+.question-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.q-header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.q-num { background: var(--accent); color: #fff; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; flex-shrink: 0; }
+.q-text { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+.meta { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.03em; }
+.badge.easy { background: #d1fae5; color: var(--easy); }
+.badge.medium { background: #fef3c7; color: var(--medium); }
+.badge.hard { background: #fee2e2; color: var(--hard); }
+.badge.cat { background: var(--accent-light); color: var(--accent); }
+.label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
+.answer-block { margin-bottom: 14px; }
+pre.sql { background: var(--sql-bg); color: var(--sql-text); padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.82rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+.explanation-block p { color: #475569; font-size: 0.92rem; }
+.search-box { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; margin-bottom: 16px; }
+.search-box:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.hidden { display: none !important; }
+footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+@media (max-width: 600px) { .q-header { flex-direction: column; } header h1 { font-size: 1.4rem; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>100 SQL Interview Questions with Answers</h1>
+    <p>Sonaal Topno &nbsp;|&nbsp; Senior Business Consultant / Analytics Consultant &nbsp;|&nbsp; PostgreSQL / BigQuery</p>
+  </div>
+</header>
+<div class="container">
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <input type="text" class="search-box" id="search" placeholder="Search questions (e.g. churn, window, JOIN)...">
+    <ul><li><a href="#fundamentals">Fundamentals</a> <span class="toc-count">(10)</span></li><li><a href="#joins">JOINs</a> <span class="toc-count">(12)</span></li><li><a href="#aggregations">Aggregations</a> <span class="toc-count">(12)</span></li><li><a href="#ctes">CTEs</a> <span class="toc-count">(12)</span></li><li><a href="#window">Window</a> <span class="toc-count">(15)</span></li><li><a href="#business">Business</a> <span class="toc-count">(18)</span></li><li><a href="#data-quality">Data Quality</a> <span class="toc-count">(8)</span></li><li><a href="#performance">Performance</a> <span class="toc-count">(8)</span></li><li><a href="#advanced">Advanced</a> <span class="toc-count">(5)</span></li></ul>
+  </div>
+  <div class="schema">
+    <div class="label">Sample Schema Reference</div>
+-- users(user_id, name, email, country, signup_date, is_test)
+-- orders(order_id, user_id, product_id, amount, order_date, refunded)
+-- products(product_id, product_name, category)
+-- transactions(user_id, txn_type, amount, txn_date, txn_time)
+-- events(user_id, event_type, event_time, event_date, platform)
+-- experiment(user_id, variant, converted, logged_in_post_assignment)
+-- gaming_txns(user_id, txn_type, amount, txn_time)
+-- sessions(user_id, game_id, start_time, end_time)
+-- games(game_id, game_name)
+-- marketing(channel, spend, user_id)
+  </div>
+  <section class="category" id="fundamentals"><h2>Fundamentals</h2>
+<article class="question-card" id="q1">
+  <div class="q-header">
+    <span class="q-num">Q1</span>
+    <h3 class="q-text">Find all users who signed up in January 2025.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, signup_date FROM users WHERE signup_date &gt;= DATE &#x27;2025-01-01&#x27; AND signup_date &lt; DATE &#x27;2025-02-01&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Half-open date range avoids time-of-day bugs and stays sargable.</p>
+  </div>
+</article>
+<article class="question-card" id="q2">
+  <div class="q-header">
+    <span class="q-num">Q2</span>
+    <h3 class="q-text">List distinct countries from users.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DISTINCT country FROM users WHERE country IS NOT NULL ORDER BY country;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>DISTINCT deduplicates; NULL filter keeps reports clean.</p>
+  </div>
+</article>
+<article class="question-card" id="q3">
+  <div class="q-header">
+    <span class="q-num">Q3</span>
+    <h3 class="q-text">Find users with gmail.com email domain.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, email FROM users WHERE email LIKE &#x27;%@gmail.com&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LIKE works in interviews; production may use SPLIT_PART(email,&#x27;@&#x27;,2).</p>
+  </div>
+</article>
+<article class="question-card" id="q4">
+  <div class="q-header">
+    <span class="q-num">Q4</span>
+    <h3 class="q-text">Calculate DAU for the last 7 days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE(event_timestamp) AS day, COUNT(DISTINCT user_id) AS dau FROM events WHERE event_timestamp &gt;= CURRENT_DATE - INTERVAL &#x27;7 days&#x27; GROUP BY 1 ORDER BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>DAU = distinct users per calendar day; clarify timezone and qualifying events.</p>
+  </div>
+</article>
+<article class="question-card" id="q5">
+  <div class="q-header">
+    <span class="q-num">Q5</span>
+    <h3 class="q-text">Users who deposited but never withdrew.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT d.user_id FROM (SELECT DISTINCT user_id FROM transactions WHERE txn_type=&#x27;deposit&#x27;) d LEFT JOIN (SELECT DISTINCT user_id FROM transactions WHERE txn_type=&#x27;withdraw&#x27;) w ON d.user_id=w.user_id WHERE w.user_id IS NULL;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Anti-join: in deposit set, not in withdraw set.</p>
+  </div>
+</article>
+<article class="question-card" id="q6">
+  <div class="q-header">
+    <span class="q-num">Q6</span>
+    <h3 class="q-text">Top 10 products by revenue.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT product_id, SUM(amount) AS revenue FROM orders GROUP BY 1 ORDER BY revenue DESC LIMIT 10;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Aggregate then ORDER BY + LIMIT.</p>
+  </div>
+</article>
+<article class="question-card" id="q7">
+  <div class="q-header">
+    <span class="q-num">Q7</span>
+    <h3 class="q-text">Average order value per country.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT u.country, SUM(o.amount)/NULLIF(COUNT(DISTINCT o.order_id),0) AS aov FROM orders o JOIN users u ON o.user_id=u.user_id GROUP BY u.country;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>AOV = total revenue / distinct orders.</p>
+  </div>
+</article>
+<article class="question-card" id="q8">
+  <div class="q-header">
+    <span class="q-num">Q8</span>
+    <h3 class="q-text">Users active on 3+ distinct days in last 30 days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id FROM events WHERE event_timestamp &gt;= CURRENT_DATE - INTERVAL &#x27;30 days&#x27; GROUP BY user_id HAVING COUNT(DISTINCT DATE(event_timestamp))&gt;=3;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>HAVING filters post-aggregation.</p>
+  </div>
+</article>
+<article class="question-card" id="q9">
+  <div class="q-header">
+    <span class="q-num">Q9</span>
+    <h3 class="q-text">Case-insensitive name search for &#x27;sonaal&#x27;.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, name FROM users WHERE LOWER(name)=&#x27;sonaal&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LOWER() for case-insensitive match.</p>
+  </div>
+</article>
+<article class="question-card" id="q10">
+  <div class="q-header">
+    <span class="q-num">Q10</span>
+    <h3 class="q-text">First deposit within 7 days of signup.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Fundamentals</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH fe AS (SELECT u.user_id, MIN(u.signup_date) AS signup, MIN(CASE WHEN t.txn_type=&#x27;deposit&#x27; THEN t.txn_date END) AS first_dep FROM users u LEFT JOIN transactions t ON u.user_id=t.user_id GROUP BY u.user_id) SELECT user_id FROM fe WHERE first_dep IS NOT NULL AND first_dep &lt;= signup + INTERVAL &#x27;7 days&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>User-grain aggregation before date comparison.</p>
+  </div>
+</article></section><section class="category" id="joins"><h2>JOINs</h2>
+<article class="question-card" id="q11">
+  <div class="q-header">
+    <span class="q-num">Q11</span>
+    <h3 class="q-text">Orders with customer names (INNER JOIN).</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT o.order_id, o.amount, u.name FROM orders o INNER JOIN users u ON o.user_id=u.user_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>INNER JOIN keeps only matching rows.</p>
+  </div>
+</article>
+<article class="question-card" id="q12">
+  <div class="q-header">
+    <span class="q-num">Q12</span>
+    <h3 class="q-text">All users with order count including zeros.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT u.user_id, u.name, COUNT(o.order_id) AS orders FROM users u LEFT JOIN orders o ON u.user_id=o.user_id GROUP BY u.user_id, u.name;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LEFT JOIN + COUNT gives zero for users without orders.</p>
+  </div>
+</article>
+<article class="question-card" id="q13">
+  <div class="q-header">
+    <span class="q-num">Q13</span>
+    <h3 class="q-text">Users who ordered in both 2024 and 2025.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id FROM orders WHERE EXTRACT(YEAR FROM order_date) IN (2024,2025) GROUP BY user_id HAVING COUNT(DISTINCT EXTRACT(YEAR FROM order_date))=2;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Distinct year count must equal 2.</p>
+  </div>
+</article>
+<article class="question-card" id="q14">
+  <div class="q-header">
+    <span class="q-num">Q14</span>
+    <h3 class="q-text">Employee-manager pairs (self-join).</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT e.employee_id, e.name AS employee, m.name AS manager FROM employees e LEFT JOIN employees m ON e.manager_id=m.employee_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Self-join links row to another in same table.</p>
+  </div>
+</article>
+<article class="question-card" id="q15">
+  <div class="q-header">
+    <span class="q-num">Q15</span>
+    <h3 class="q-text">Products never ordered.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT p.product_id, p.product_name FROM products p LEFT JOIN orders o ON p.product_id=o.product_id WHERE o.product_id IS NULL;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LEFT JOIN + NULL filter = anti-join.</p>
+  </div>
+</article>
+<article class="question-card" id="q16">
+  <div class="q-header">
+    <span class="q-num">Q16</span>
+    <h3 class="q-text">Each user&#x27;s latest order only.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH latest AS (SELECT user_id, MAX(order_date) AS md FROM orders GROUP BY user_id) SELECT o.* FROM orders o JOIN latest l ON o.user_id=l.user_id AND o.order_date=l.md;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Max date per user then join back.</p>
+  </div>
+</article>
+<article class="question-card" id="q17">
+  <div class="q-header">
+    <span class="q-num">Q17</span>
+    <h3 class="q-text">Bought product A but not B.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DISTINCT user_id FROM orders WHERE product_id=&#x27;A&#x27; AND user_id NOT IN (SELECT user_id FROM orders WHERE product_id=&#x27;B&#x27; AND user_id IS NOT NULL);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>NOT IN with NULL guard, or prefer NOT EXISTS.</p>
+  </div>
+</article>
+<article class="question-card" id="q18">
+  <div class="q-header">
+    <span class="q-num">Q18</span>
+    <h3 class="q-text">Revenue per product category (3-table join).</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT p.category, SUM(o.amount) AS revenue FROM orders o JOIN products p ON o.product_id=p.product_id GROUP BY p.category ORDER BY revenue DESC;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Join facts to dimension, aggregate at category grain.</p>
+  </div>
+</article>
+<article class="question-card" id="q19">
+  <div class="q-header">
+    <span class="q-num">Q19</span>
+    <h3 class="q-text">Duplicate order_ids.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT order_id, COUNT(*) FROM orders GROUP BY order_id HAVING COUNT(*)&gt;1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Standard duplicate detection.</p>
+  </div>
+</article>
+<article class="question-card" id="q20">
+  <div class="q-header">
+    <span class="q-num">Q20</span>
+    <h3 class="q-text">Monthly revenue 2024 vs 2025 side by side.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH r24 AS (SELECT EXTRACT(MONTH FROM order_date) m, SUM(amount) r FROM orders WHERE EXTRACT(YEAR FROM order_date)=2024 GROUP BY 1), r25 AS (SELECT EXTRACT(MONTH FROM order_date) m, SUM(amount) r FROM orders WHERE EXTRACT(YEAR FROM order_date)=2025 GROUP BY 1) SELECT COALESCE(r24.m,r25.m) AS month, r24.r AS rev_2024, r25.r AS rev_2025 FROM r24 FULL OUTER JOIN r25 ON r24.m=r25.m ORDER BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>FULL OUTER JOIN retains months in only one year.</p>
+  </div>
+</article>
+<article class="question-card" id="q21">
+  <div class="q-header">
+    <span class="q-num">Q21</span>
+    <h3 class="q-text">Avg session length per game.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT g.game_name, AVG(EXTRACT(EPOCH FROM (s.end_time-s.start_time))/60) AS avg_min FROM sessions s JOIN games g ON s.game_id=g.game_id GROUP BY g.game_name;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Join sessions to game metadata; compute duration before AVG.</p>
+  </div>
+</article>
+<article class="question-card" id="q22">
+  <div class="q-header">
+    <span class="q-num">Q22</span>
+    <h3 class="q-text">RMG: net positive deposit-withdraw days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">JOINs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH d AS (SELECT user_id, txn_date, SUM(CASE WHEN txn_type=&#x27;deposit&#x27; THEN amount ELSE 0 END) dep, SUM(CASE WHEN txn_type=&#x27;withdraw&#x27; THEN amount ELSE 0 END) wdr FROM transactions GROUP BY 1,2) SELECT * FROM d WHERE dep&gt;wdr;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Aggregate to user-day before comparing.</p>
+  </div>
+</article></section><section class="category" id="aggregations"><h2>Aggregations</h2>
+<article class="question-card" id="q23">
+  <div class="q-header">
+    <span class="q-num">Q23</span>
+    <h3 class="q-text">Monthly revenue and order count.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE_TRUNC(&#x27;month&#x27;,order_date) AS month, COUNT(*) orders, SUM(amount) revenue FROM orders GROUP BY 1 ORDER BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>DATE_TRUNC for monthly buckets.</p>
+  </div>
+</article>
+<article class="question-card" id="q24">
+  <div class="q-header">
+    <span class="q-num">Q24</span>
+    <h3 class="q-text">Countries with &gt;1000 users.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT country, COUNT(*) FROM users GROUP BY country HAVING COUNT(*)&gt;1000;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>HAVING filters groups.</p>
+  </div>
+</article>
+<article class="question-card" id="q25">
+  <div class="q-header">
+    <span class="q-num">Q25</span>
+    <h3 class="q-text">Median order value.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY amount) FROM orders;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>PostgreSQL percentile; BigQuery: APPROX_QUANTILES(amount,100)[OFFSET(50)].</p>
+  </div>
+</article>
+<article class="question-card" id="q26">
+  <div class="q-header">
+    <span class="q-num">Q26</span>
+    <h3 class="q-text">Revenue % by category.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT category, SUM(amount) rev, 100.0*SUM(amount)/SUM(SUM(amount)) OVER() pct FROM orders o JOIN products p ON o.product_id=p.product_id GROUP BY category;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Window sum for grand total percentage.</p>
+  </div>
+</article>
+<article class="question-card" id="q27">
+  <div class="q-header">
+    <span class="q-num">Q27</span>
+    <h3 class="q-text">Rolling 7-day revenue sum.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT order_date, SUM(amount) OVER (ORDER BY order_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS roll_7d FROM daily_revenue;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>7-row rolling frame.</p>
+  </div>
+</article>
+<article class="question-card" id="q28">
+  <div class="q-header">
+    <span class="q-num">Q28</span>
+    <h3 class="q-text">New vs returning orders per day.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE(order_date) day, COUNT(*) FILTER (WHERE rn=1) new_ord, COUNT(*) FILTER (WHERE rn&gt;1) ret_ord FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date) rn FROM orders) t GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>ROW_NUMBER identifies first order.</p>
+  </div>
+</article>
+<article class="question-card" id="q29">
+  <div class="q-header">
+    <span class="q-num">Q29</span>
+    <h3 class="q-text">Categories with avg &gt;2x global avg.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH g AS (SELECT AVG(amount) ga FROM orders) SELECT p.category, AVG(o.amount) ca FROM orders o JOIN products p ON o.product_id=p.product_id CROSS JOIN g HAVING AVG(o.amount)&gt;2*MAX(g.ga) GROUP BY p.category;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>CROSS JOIN for global benchmark.</p>
+  </div>
+</article>
+<article class="question-card" id="q30">
+  <div class="q-header">
+    <span class="q-num">Q30</span>
+    <h3 class="q-text">Subtotals with GROUPING SETS.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT country, city, COUNT(*) FROM users GROUP BY GROUPING SETS ((country,city),(country),());</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Multiple aggregation levels in one query.</p>
+  </div>
+</article>
+<article class="question-card" id="q31">
+  <div class="q-header">
+    <span class="q-num">Q31</span>
+    <h3 class="q-text">Pivot revenue by quarter.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT EXTRACT(YEAR FROM order_date) yr, SUM(CASE WHEN EXTRACT(QUARTER FROM order_date)=1 THEN amount END) q1, SUM(CASE WHEN EXTRACT(QUARTER FROM order_date)=2 THEN amount END) q2, SUM(CASE WHEN EXTRACT(QUARTER FROM order_date)=3 THEN amount END) q3, SUM(CASE WHEN EXTRACT(QUARTER FROM order_date)=4 THEN amount END) q4 FROM orders GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Conditional SUM pivots without PIVOT.</p>
+  </div>
+</article>
+<article class="question-card" id="q32">
+  <div class="q-header">
+    <span class="q-num">Q32</span>
+    <h3 class="q-text">Gaming NGR per day.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE(txn_time) day, SUM(CASE WHEN txn_type=&#x27;bet&#x27; THEN amount ELSE 0 END)-SUM(CASE WHEN txn_type=&#x27;win&#x27; THEN amount ELSE 0 END)-SUM(CASE WHEN txn_type=&#x27;bonus&#x27; THEN amount ELSE 0 END) ngr FROM gaming_txns GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>NGR = bets - wins - bonuses.</p>
+  </div>
+</article>
+<article class="question-card" id="q33">
+  <div class="q-header">
+    <span class="q-num">Q33</span>
+    <h3 class="q-text">CPA by marketing channel.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT channel, SUM(spend)/NULLIF(COUNT(DISTINCT user_id),0) cpa FROM marketing GROUP BY channel;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Cost per distinct acquired user.</p>
+  </div>
+</article>
+<article class="question-card" id="q34">
+  <div class="q-header">
+    <span class="q-num">Q34</span>
+    <h3 class="q-text">A/B conversion rate by variant.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Aggregations</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT variant, COUNT(DISTINCT user_id) assigned, COUNT(DISTINCT CASE WHEN converted THEN user_id END) conv, 100.0*COUNT(DISTINCT CASE WHEN converted THEN user_id END)/NULLIF(COUNT(DISTINCT user_id),0) rate FROM experiment GROUP BY variant;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Distinct users prevent fan-out.</p>
+  </div>
+</article></section><section class="category" id="ctes"><h2>CTEs</h2>
+<article class="question-card" id="q35">
+  <div class="q-header">
+    <span class="q-num">Q35</span>
+    <h3 class="q-text">Users with above-average order count.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH uc AS (SELECT user_id, COUNT(*) cnt FROM orders GROUP BY user_id) SELECT user_id FROM uc WHERE cnt &gt; (SELECT AVG(cnt) FROM uc);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>CTE computes per-user counts; subquery for average.</p>
+  </div>
+</article>
+<article class="question-card" id="q36">
+  <div class="q-header">
+    <span class="q-num">Q36</span>
+    <h3 class="q-text">Second highest salary.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH ranked AS (SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) rnk FROM employees) SELECT DISTINCT salary FROM ranked WHERE rnk=2;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>DENSE_RANK handles ties for Nth highest.</p>
+  </div>
+</article>
+<article class="question-card" id="q37">
+  <div class="q-header">
+    <span class="q-num">Q37</span>
+    <h3 class="q-text">Recursive CTE: generate dates for last 30 days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH RECURSIVE dates AS (SELECT CURRENT_DATE AS d UNION ALL SELECT d-1 FROM dates WHERE d &gt; CURRENT_DATE-30) SELECT d FROM dates;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Recursive CTE builds date spine.</p>
+  </div>
+</article>
+<article class="question-card" id="q38">
+  <div class="q-header">
+    <span class="q-num">Q38</span>
+    <h3 class="q-text">YoY revenue growth per month.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH m AS (SELECT DATE_TRUNC(&#x27;month&#x27;,order_date) mo, SUM(amount) rev FROM orders GROUP BY 1) SELECT mo, rev, LAG(rev,12) OVER (ORDER BY mo) prev_yr, (rev-LAG(rev,12) OVER (ORDER BY mo))/NULLIF(LAG(rev,12) OVER (ORDER BY mo),0) yoy FROM m;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LAG 12 months for YoY.</p>
+  </div>
+</article>
+<article class="question-card" id="q39">
+  <div class="q-header">
+    <span class="q-num">Q39</span>
+    <h3 class="q-text">Correlated subquery: users with max order per country.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT u.user_id, u.country, o.amount FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.amount = (SELECT MAX(amount) FROM orders o2 JOIN users u2 ON o2.user_id=u2.user_id WHERE u2.country=u.country);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Correlated subquery compares to country max.</p>
+  </div>
+</article>
+<article class="question-card" id="q40">
+  <div class="q-header">
+    <span class="q-num">Q40</span>
+    <h3 class="q-text">Chained CTEs: signup → first deposit → days to convert.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH fd AS (SELECT user_id, MIN(txn_date) first_dep FROM transactions WHERE txn_type=&#x27;deposit&#x27; GROUP BY 1) SELECT u.user_id, fd.first_dep - u.signup_date AS days_to_convert FROM users u JOIN fd ON u.user_id=fd.user_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Multi-step CTE pipeline for funnel metric.</p>
+  </div>
+</article>
+<article class="question-card" id="q41">
+  <div class="q-header">
+    <span class="q-num">Q41</span>
+    <h3 class="q-text">EXISTS: users with at least one refund.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, name FROM users u WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id=u.user_id AND o.refunded=TRUE);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>EXISTS is efficient for presence checks.</p>
+  </div>
+</article>
+<article class="question-card" id="q42">
+  <div class="q-header">
+    <span class="q-num">Q42</span>
+    <h3 class="q-text">Top 3 products per region.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH ranked AS (SELECT region, product_id, SUM(amount) rev, ROW_NUMBER() OVER (PARTITION BY region ORDER BY SUM(amount) DESC) rn FROM orders GROUP BY region, product_id) SELECT * FROM ranked WHERE rn&lt;=3;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>ROW_NUMBER per partition for top-N.</p>
+  </div>
+</article>
+<article class="question-card" id="q43">
+  <div class="q-header">
+    <span class="q-num">Q43</span>
+    <h3 class="q-text">Scalar subquery in SELECT: each order as % of user total.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT order_id, amount, 100.0*amount/(SELECT SUM(amount) FROM orders o2 WHERE o2.user_id=o.user_id) pct FROM orders o;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Scalar subquery for per-user share.</p>
+  </div>
+</article>
+<article class="question-card" id="q44">
+  <div class="q-header">
+    <span class="q-num">Q44</span>
+    <h3 class="q-text">Materialized logic: 30-day churned users.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH last_active AS (SELECT user_id, MAX(event_date) last_dt FROM events GROUP BY 1) SELECT user_id FROM last_active WHERE last_dt &lt; CURRENT_DATE - INTERVAL &#x27;30 days&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Churn = no activity in 30 days.</p>
+  </div>
+</article>
+<article class="question-card" id="q45">
+  <div class="q-header">
+    <span class="q-num">Q45</span>
+    <h3 class="q-text">UNION: combine deposits and withdrawals into one ledger.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, txn_date, &#x27;deposit&#x27; type, amount FROM transactions WHERE txn_type=&#x27;deposit&#x27; UNION ALL SELECT user_id, txn_date, &#x27;withdraw&#x27;, -amount FROM transactions WHERE txn_type=&#x27;withdraw&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>UNION ALL preserves all rows; sign convention for withdrawals.</p>
+  </div>
+</article>
+<article class="question-card" id="q46">
+  <div class="q-header">
+    <span class="q-num">Q46</span>
+    <h3 class="q-text">Fraud: users with &gt;5 deposits in 1 hour.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">CTEs</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH hourly AS (SELECT user_id, DATE_TRUNC(&#x27;hour&#x27;,txn_time) hr, COUNT(*) cnt FROM transactions WHERE txn_type=&#x27;deposit&#x27; GROUP BY 1,2) SELECT user_id, hr, cnt FROM hourly WHERE cnt&gt;5;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Aggregate to user-hour grain for velocity check.</p>
+  </div>
+</article></section><section class="category" id="window"><h2>Window</h2>
+<article class="question-card" id="q47">
+  <div class="q-header">
+    <span class="q-num">Q47</span>
+    <h3 class="q-text">Running total of daily revenue.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT order_date, amount, SUM(amount) OVER (ORDER BY order_date) running_total FROM daily_revenue;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Cumulative SUM with ORDER BY in OVER.</p>
+  </div>
+</article>
+<article class="question-card" id="q48">
+  <div class="q-header">
+    <span class="q-num">Q48</span>
+    <h3 class="q-text">Rank employees by salary per department.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT employee_id, dept, salary, RANK() OVER (PARTITION BY dept ORDER BY salary DESC) rnk FROM employees;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>PARTITION BY resets ranking per department.</p>
+  </div>
+</article>
+<article class="question-card" id="q49">
+  <div class="q-header">
+    <span class="q-num">Q49</span>
+    <h3 class="q-text">LAG: compare each day&#x27;s revenue to previous day.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT order_date, amount, LAG(amount) OVER (ORDER BY order_date) prev, amount-LAG(amount) OVER (ORDER BY order_date) diff FROM daily_revenue;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LAG accesses previous row.</p>
+  </div>
+</article>
+<article class="question-card" id="q50">
+  <div class="q-header">
+    <span class="q-num">Q50</span>
+    <h3 class="q-text">LEAD: days until next purchase per user.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, order_date, LEAD(order_date) OVER (PARTITION BY user_id ORDER BY order_date) next_order, LEAD(order_date) OVER (PARTITION BY user_id ORDER BY order_date)-order_date days_between FROM orders;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LEAD for forward-looking gap.</p>
+  </div>
+</article>
+<article class="question-card" id="q51">
+  <div class="q-header">
+    <span class="q-num">Q51</span>
+    <h3 class="q-text">First and last value in partition.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, order_date, amount, FIRST_VALUE(amount) OVER (PARTITION BY user_id ORDER BY order_date) first_amt, LAST_VALUE(amount) OVER (PARTITION BY user_id ORDER BY order_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) last_amt FROM orders;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>LAST_VALUE needs explicit frame bounds.</p>
+  </div>
+</article>
+<article class="question-card" id="q52">
+  <div class="q-header">
+    <span class="q-num">Q52</span>
+    <h3 class="q-text">NTILE: divide users into revenue quartiles.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, total_rev, NTILE(4) OVER (ORDER BY total_rev) quartile FROM (SELECT user_id, SUM(amount) total_rev FROM orders GROUP BY user_id) t;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>NTILE for equal-sized buckets.</p>
+  </div>
+</article>
+<article class="question-card" id="q53">
+  <div class="q-header">
+    <span class="q-num">Q53</span>
+    <h3 class="q-text">Gaps and islands: consecutive login days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH flagged AS (SELECT user_id, login_date, login_date - (ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY login_date))::int grp FROM logins) SELECT user_id, MIN(login_date) streak_start, MAX(login_date) streak_end, COUNT(*) streak_len FROM flagged GROUP BY user_id, grp HAVING COUNT(*)&gt;=3;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Date minus row number groups consecutive dates.</p>
+  </div>
+</article>
+<article class="question-card" id="q54">
+  <div class="q-header">
+    <span class="q-num">Q54</span>
+    <h3 class="q-text">Sessionization: 30-minute gap.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH diff AS (SELECT user_id, event_time, CASE WHEN event_time - LAG(event_time) OVER (PARTITION BY user_id ORDER BY event_time) &gt; INTERVAL &#x27;30 min&#x27; OR LAG(event_time) OVER (PARTITION BY user_id ORDER BY event_time) IS NULL THEN 1 ELSE 0 END new_sess FROM events) SELECT user_id, SUM(new_sess) OVER (PARTITION BY user_id ORDER BY event_time) session_id, event_time FROM diff;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Flag new session when gap &gt;30 min; cumulative sum assigns session IDs.</p>
+  </div>
+</article>
+<article class="question-card" id="q55">
+  <div class="q-header">
+    <span class="q-num">Q55</span>
+    <h3 class="q-text">Moving average 7-day.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT day, dau, AVG(dau) OVER (ORDER BY day ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) ma7 FROM daily_dau;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>AVG window for smoothing.</p>
+  </div>
+</article>
+<article class="question-card" id="q56">
+  <div class="q-header">
+    <span class="q-num">Q56</span>
+    <h3 class="q-text">Percent rank of product revenue.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT product_id, revenue, PERCENT_RANK() OVER (ORDER BY revenue) pct_rank FROM (SELECT product_id, SUM(amount) revenue FROM orders GROUP BY product_id) t;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>PERCENT_RANK for relative standing.</p>
+  </div>
+</article>
+<article class="question-card" id="q57">
+  <div class="q-header">
+    <span class="q-num">Q57</span>
+    <h3 class="q-text">Deduplicate: keep latest row per user.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH ranked AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY updated_at DESC) rn FROM user_profiles) SELECT * FROM ranked WHERE rn=1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>ROW_NUMBER=1 is standard dedup pattern.</p>
+  </div>
+</article>
+<article class="question-card" id="q58">
+  <div class="q-header">
+    <span class="q-num">Q58</span>
+    <h3 class="q-text">Difference from partition average.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, amount, amount - AVG(amount) OVER (PARTITION BY user_id) diff_from_avg FROM orders;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Compare each row to partition mean.</p>
+  </div>
+</article>
+<article class="question-card" id="q59">
+  <div class="q-header">
+    <span class="q-num">Q59</span>
+    <h3 class="q-text">Cumulative distinct users per day.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT day, COUNT(DISTINCT user_id) OVER (ORDER BY day) cumulative_users FROM (SELECT DISTINCT DATE(event_time) day, user_id FROM events) t;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Distinct in window counts unique users to date.</p>
+  </div>
+</article>
+<article class="question-card" id="q60">
+  <div class="q-header">
+    <span class="q-num">Q60</span>
+    <h3 class="q-text">RMG: running deposit total per user.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, txn_time, amount, SUM(amount) OVER (PARTITION BY user_id ORDER BY txn_time) running_deposits FROM transactions WHERE txn_type=&#x27;deposit&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Running sum partitioned by user.</p>
+  </div>
+</article>
+<article class="question-card" id="q61">
+  <div class="q-header">
+    <span class="q-num">Q61</span>
+    <h3 class="q-text">Sportsbet: weekly active users trend.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Window</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT week, COUNT(DISTINCT user_id) wau, LAG(COUNT(DISTINCT user_id)) OVER (ORDER BY week) prev_wau FROM (SELECT DATE_TRUNC(&#x27;week&#x27;,event_time) week, user_id FROM events) t GROUP BY week;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>WAU with week-over-week via LAG on aggregate.</p>
+  </div>
+</article></section><section class="category" id="business"><h2>Business</h2>
+<article class="question-card" id="q62">
+  <div class="q-header">
+    <span class="q-num">Q62</span>
+    <h3 class="q-text">Cohort retention: D7 retention rate.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH cohorts AS (SELECT user_id, DATE_TRUNC(&#x27;month&#x27;,signup_date) cohort FROM users), activity AS (SELECT user_id, DATE(event_time) active_day FROM events) SELECT c.cohort, COUNT(DISTINCT c.user_id) cohort_size, COUNT(DISTINCT CASE WHEN a.active_day BETWEEN c.cohort AND c.cohort+INTERVAL &#x27;7 days&#x27; THEN c.user_id END)*100.0/COUNT(DISTINCT c.user_id) d7_ret FROM cohorts c LEFT JOIN activity a ON c.user_id=a.user_id GROUP BY c.cohort;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Join cohort to activity; conditional distinct for retained users.</p>
+  </div>
+</article>
+<article class="question-card" id="q63">
+  <div class="q-header">
+    <span class="q-num">Q63</span>
+    <h3 class="q-text">Full retention matrix (week 0-4).</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH c AS (SELECT user_id, DATE_TRUNC(&#x27;week&#x27;,signup_date) cohort FROM users), a AS (SELECT user_id, DATE_TRUNC(&#x27;week&#x27;,event_time) active_week FROM events) SELECT c.cohort, EXTRACT(WEEK FROM a.active_week - c.cohort) week_n, COUNT(DISTINCT c.user_id) users FROM c JOIN a ON c.user_id=a.user_id GROUP BY 1,2 ORDER BY 1,2;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Retention heatmap data without PIVOT.</p>
+  </div>
+</article>
+<article class="question-card" id="q64">
+  <div class="q-header">
+    <span class="q-num">Q64</span>
+    <h3 class="q-text">Funnel: signup → deposit → first bet conversion.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH s AS (SELECT COUNT(DISTINCT user_id) n FROM users), d AS (SELECT COUNT(DISTINCT user_id) n FROM transactions WHERE txn_type=&#x27;deposit&#x27;), b AS (SELECT COUNT(DISTINCT user_id) n FROM transactions WHERE txn_type=&#x27;bet&#x27;) SELECT s.n signups, d.n depositors, 100.0*d.n/s.n dep_rate, b.n bettors, 100.0*b.n/d.n bet_rate FROM s,d,b;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Step conversion with distinct user counts.</p>
+  </div>
+</article>
+<article class="question-card" id="q65">
+  <div class="q-header">
+    <span class="q-num">Q65</span>
+    <h3 class="q-text">A/B test: statistical summary by variant.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT variant, COUNT(DISTINCT user_id) n, AVG(converted::int) conv_rate, STDDEV(converted::int) std FROM experiment GROUP BY variant;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Report n, rate, and variance for significance discussion.</p>
+  </div>
+</article>
+<article class="question-card" id="q66">
+  <div class="q-header">
+    <span class="q-num">Q66</span>
+    <h3 class="q-text">Churn: users inactive 30+ days after last activity.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id FROM (SELECT user_id, MAX(event_date) last_active FROM events GROUP BY user_id) t WHERE last_active &lt; CURRENT_DATE - INTERVAL &#x27;30 days&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Simple churn definition; state assumptions.</p>
+  </div>
+</article>
+<article class="question-card" id="q67">
+  <div class="q-header">
+    <span class="q-num">Q67</span>
+    <h3 class="q-text">Reactivation: churned users who returned.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH churned AS (SELECT user_id, MAX(event_date) last_a FROM events GROUP BY user_id HAVING MAX(event_date)&lt;CURRENT_DATE-INTERVAL &#x27;30 days&#x27;) SELECT c.user_id FROM churned c JOIN events e ON c.user_id=e.user_id WHERE e.event_date &gt; c.last_a + INTERVAL &#x27;30 days&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Users with activity after churn window.</p>
+  </div>
+</article>
+<article class="question-card" id="q68">
+  <div class="q-header">
+    <span class="q-num">Q68</span>
+    <h3 class="q-text">LTV: cumulative revenue per user at 30/60/90 days.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH user_rev AS (SELECT u.user_id, u.signup_date, o.order_date, o.amount FROM users u JOIN orders o ON u.user_id=o.user_id) SELECT user_id, SUM(CASE WHEN order_date&lt;=signup_date+30 THEN amount END) ltv_30, SUM(CASE WHEN order_date&lt;=signup_date+60 THEN amount END) ltv_60, SUM(CASE WHEN order_date&lt;=signup_date+90 THEN amount END) ltv_90 FROM user_rev GROUP BY user_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Conditional sum for period LTV.</p>
+  </div>
+</article>
+<article class="question-card" id="q69">
+  <div class="q-header">
+    <span class="q-num">Q69</span>
+    <h3 class="q-text">Free-to-cash conversion rate.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT 100.0*COUNT(DISTINCT CASE WHEN first_cash IS NOT NULL THEN user_id END)/COUNT(DISTINCT user_id) f2c_rate FROM (SELECT u.user_id, MIN(CASE WHEN t.txn_type=&#x27;deposit&#x27; THEN t.txn_date END) first_cash FROM users u LEFT JOIN transactions t ON u.user_id=t.user_id GROUP BY u.user_id) t;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Core RMG metric from your Junglee experience.</p>
+  </div>
+</article>
+<article class="question-card" id="q70">
+  <div class="q-header">
+    <span class="q-num">Q70</span>
+    <h3 class="q-text">ARPU by month.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE_TRUNC(&#x27;month&#x27;,e.event_time) month, SUM(revenue)/COUNT(DISTINCT e.user_id) arpu FROM events e GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>ARPU = total revenue / distinct active users.</p>
+  </div>
+</article>
+<article class="question-card" id="q71">
+  <div class="q-header">
+    <span class="q-num">Q71</span>
+    <h3 class="q-text">NGR lift from A/B test on money movement.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT variant, SUM(ngr) total_ngr, SUM(ngr)/COUNT(DISTINCT user_id) ngr_per_user FROM experiment_results GROUP BY variant;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Tie to your +4.2% NGR A/B testing bullet.</p>
+  </div>
+</article>
+<article class="question-card" id="q72">
+  <div class="q-header">
+    <span class="q-num">Q72</span>
+    <h3 class="q-text">Marketing attribution: last-touch channel per conversion.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH last_touch AS (SELECT user_id, channel, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY touch_time DESC) rn FROM marketing_touches WHERE converted) SELECT channel, COUNT(*) conversions FROM last_touch WHERE rn=1 GROUP BY channel;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Last-touch attribution model.</p>
+  </div>
+</article>
+<article class="question-card" id="q73">
+  <div class="q-header">
+    <span class="q-num">Q73</span>
+    <h3 class="q-text">Cohort revenue curve.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT cohort_month, months_since, SUM(amount) revenue FROM (SELECT DATE_TRUNC(&#x27;month&#x27;,u.signup_date) cohort_month, DATE_TRUNC(&#x27;month&#x27;,o.order_date) order_month, o.amount FROM users u JOIN orders o ON u.user_id=o.user_id) t CROSS JOIN LATERAL (SELECT EXTRACT(MONTH FROM AGE(order_month, cohort_month)) months_since) m GROUP BY 1,2 ORDER BY 1,2;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Revenue by months since signup.</p>
+  </div>
+</article>
+<article class="question-card" id="q74">
+  <div class="q-header">
+    <span class="q-num">Q74</span>
+    <h3 class="q-text">Fraud: flag accounts with deposit-withdraw ratio &lt;0.1 within 24h.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH pairs AS (SELECT user_id, SUM(CASE WHEN txn_type=&#x27;deposit&#x27; THEN amount END) dep, SUM(CASE WHEN txn_type=&#x27;withdraw&#x27; THEN amount END) wdr FROM transactions WHERE txn_time &gt;= CURRENT_DATE-1 GROUP BY user_id) SELECT user_id FROM pairs WHERE wdr/NULLIF(dep,0)&lt;0.1 AND dep&gt;1000;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Money laundering pattern detection.</p>
+  </div>
+</article>
+<article class="question-card" id="q75">
+  <div class="q-header">
+    <span class="q-num">Q75</span>
+    <h3 class="q-text">Segment users by RFM score.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>WITH rfm AS (SELECT user_id, CURRENT_DATE-MAX(order_date) recency, COUNT(*) frequency, SUM(amount) monetary FROM orders GROUP BY user_id) SELECT user_id, NTILE(3) OVER (ORDER BY recency DESC) r, NTILE(3) OVER (ORDER BY frequency) f, NTILE(3) OVER (ORDER BY monetary) m FROM rfm;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>RFM segmentation with NTILE.</p>
+  </div>
+</article>
+<article class="question-card" id="q76">
+  <div class="q-header">
+    <span class="q-num">Q76</span>
+    <h3 class="q-text">Experiment contamination: users in multiple variants.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, COUNT(DISTINCT variant) variants FROM experiment GROUP BY user_id HAVING COUNT(DISTINCT variant)&gt;1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Data quality check before A/B analysis.</p>
+  </div>
+</article>
+<article class="question-card" id="q77">
+  <div class="q-header">
+    <span class="q-num">Q77</span>
+    <h3 class="q-text">Day-1/Day-7/Day-30 retention for signup cohorts.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT signup_week, COUNT(DISTINCT user_id) signups, COUNT(DISTINCT CASE WHEN days_since_signup=1 THEN user_id END) d1, COUNT(DISTINCT CASE WHEN days_since_signup=7 THEN user_id END) d7, COUNT(DISTINCT CASE WHEN days_since_signup=30 THEN user_id END) d30 FROM (SELECT u.user_id, DATE_TRUNC(&#x27;week&#x27;,u.signup_date) signup_week, DATE(e.event_time)-u.signup_date days_since_signup FROM users u JOIN events e ON u.user_id=e.user_id) t GROUP BY signup_week;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Classic retention table for gaming.</p>
+  </div>
+</article>
+<article class="question-card" id="q78">
+  <div class="q-header">
+    <span class="q-num">Q78</span>
+    <h3 class="q-text">Revenue-to-deposit ratio improvement.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT month, SUM(revenue)/NULLIF(SUM(deposits),0) rev_to_dep FROM monthly_metrics GROUP BY month;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Your +12pp revenue-to-deposit metric.</p>
+  </div>
+</article>
+<article class="question-card" id="q79">
+  <div class="q-header">
+    <span class="q-num">Q79</span>
+    <h3 class="q-text">Power BI equivalent: top campaigns by ROI in SQL.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Business</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT campaign, (SUM(revenue)-SUM(spend))/NULLIF(SUM(spend),0) roi FROM campaigns GROUP BY campaign ORDER BY roi DESC LIMIT 10;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>ROI for marketing analytics at Sportsbet.</p>
+  </div>
+</article></section><section class="category" id="data-quality"><h2>Data Quality</h2>
+<article class="question-card" id="q80">
+  <div class="q-header">
+    <span class="q-num">Q80</span>
+    <h3 class="q-text">NULL-safe average.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT AVG(COALESCE(revenue,0)) FROM orders;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>COALESCE only if NULL means zero; otherwise AVG ignores NULLs.</p>
+  </div>
+</article>
+<article class="question-card" id="q81">
+  <div class="q-header">
+    <span class="q-num">Q81</span>
+    <h3 class="q-text">NOT IN trap with NULLs.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id FROM users WHERE NOT EXISTS (SELECT 1 FROM blocked b WHERE b.user_id=users.user_id);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>NOT EXISTS is NULL-safe; NOT IN is not.</p>
+  </div>
+</article>
+<article class="question-card" id="q82">
+  <div class="q-header">
+    <span class="q-num">Q82</span>
+    <h3 class="q-text">Join fan-out diagnosis.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT COUNT(*) raw, COUNT(DISTINCT o.order_id) distinct_orders FROM orders o JOIN promotions p ON o.order_id=p.order_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Compare COUNT vs COUNT DISTINCT to detect fan-out.</p>
+  </div>
+</article>
+<article class="question-card" id="q83">
+  <div class="q-header">
+    <span class="q-num">Q83</span>
+    <h3 class="q-text">Safe division.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge easy">Easy</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT converted*100.0/NULLIF(total,0) rate FROM metrics;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>NULLIF prevents divide-by-zero; BigQuery: SAFE_DIVIDE.</p>
+  </div>
+</article>
+<article class="question-card" id="q84">
+  <div class="q-header">
+    <span class="q-num">Q84</span>
+    <h3 class="q-text">Timezone: DAU in IST.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE(event_time AT TIME ZONE &#x27;Asia/Kolkata&#x27;) day, COUNT(DISTINCT user_id) dau FROM events GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>AT TIME ZONE for India ops.</p>
+  </div>
+</article>
+<article class="question-card" id="q85">
+  <div class="q-header">
+    <span class="q-num">Q85</span>
+    <h3 class="q-text">Exclude test accounts.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT * FROM users WHERE COALESCE(is_test,FALSE)=FALSE;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>COALESCE handles legacy NULL test flags.</p>
+  </div>
+</article>
+<article class="question-card" id="q86">
+  <div class="q-header">
+    <span class="q-num">Q86</span>
+    <h3 class="q-text">Late-arriving events: idempotent daily snapshot.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>INSERT INTO daily_dau (day, dau, computed_at) SELECT DATE(event_time), COUNT(DISTINCT user_id), NOW() FROM events WHERE DATE(event_time)=CURRENT_DATE-1 GROUP BY 1 ON CONFLICT (day) DO UPDATE SET dau=EXCLUDED.dau, computed_at=NOW();</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Upsert for reproducible daily metrics.</p>
+  </div>
+</article>
+<article class="question-card" id="q87">
+  <div class="q-header">
+    <span class="q-num">Q87</span>
+    <h3 class="q-text">Intent-to-treat vs per-protocol conversion.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Data Quality</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT variant, AVG(converted::int) itt_rate FROM experiment GROUP BY variant; -- ITT
+SELECT variant, AVG(converted::int) pp_rate FROM experiment WHERE logged_in_post_assignment GROUP BY variant; -- Per-protocol</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Two denominators; state which you&#x27;d report to leadership.</p>
+  </div>
+</article></section><section class="category" id="performance"><h2>Performance</h2>
+<article class="question-card" id="q88">
+  <div class="q-header">
+    <span class="q-num">Q88</span>
+    <h3 class="q-text">Rewrite non-sargable date filter.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>-- Slow: WHERE DATE(created_at)=&#x27;2025-03-01&#x27;
+SELECT * FROM events WHERE created_at &gt;= &#x27;2025-03-01&#x27; AND created_at &lt; &#x27;2025-03-02&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Range on raw column allows index use.</p>
+  </div>
+</article>
+<article class="question-card" id="q89">
+  <div class="q-header">
+    <span class="q-num">Q89</span>
+    <h3 class="q-text">Explain when to index user_id.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>CREATE INDEX idx_events_user ON events(user_id);</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Index high-cardinality join/filter columns.</p>
+  </div>
+</article>
+<article class="question-card" id="q90">
+  <div class="q-header">
+    <span class="q-num">Q90</span>
+    <h3 class="q-text">Partition pruning on BigQuery.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT * FROM events WHERE _PARTITIONDATE BETWEEN &#x27;2025-01-01&#x27; AND &#x27;2025-01-31&#x27;;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Filter partition column to scan less data.</p>
+  </div>
+</article>
+<article class="question-card" id="q91">
+  <div class="q-header">
+    <span class="q-num">Q91</span>
+    <h3 class="q-text">Avoid SELECT * in production.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, event_type, event_time FROM events WHERE user_id=12345;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Select only needed columns; reduces I/O.</p>
+  </div>
+</article>
+<article class="question-card" id="q92">
+  <div class="q-header">
+    <span class="q-num">Q92</span>
+    <h3 class="q-text">Pre-aggregate with materialized view.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>CREATE MATERIALIZED VIEW daily_dau AS SELECT DATE(event_time) day, COUNT(DISTINCT user_id) dau FROM events GROUP BY 1;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Materialized views for repeated expensive aggregations.</p>
+  </div>
+</article>
+<article class="question-card" id="q93">
+  <div class="q-header">
+    <span class="q-num">Q93</span>
+    <h3 class="q-text">JOIN order: filter before join.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT u.user_id FROM users u JOIN orders o ON u.user_id=o.user_id WHERE o.order_date &gt;= CURRENT_DATE-7;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Filter driving table early to reduce join size.</p>
+  </div>
+</article>
+<article class="question-card" id="q94">
+  <div class="q-header">
+    <span class="q-num">Q94</span>
+    <h3 class="q-text">APPROX_COUNT_DISTINCT for large scale.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT APPROX_COUNT_DISTINCT(user_id) FROM events;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>HyperLogLog approximation for billion-row tables.</p>
+  </div>
+</article>
+<article class="question-card" id="q95">
+  <div class="q-header">
+    <span class="q-num">Q95</span>
+    <h3 class="q-text">Clustering recommendation.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge medium">Medium</span>
+    <span class="badge cat">Performance</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>-- Cluster events on (user_id, event_date) for user-level time-range queries</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Mention clustering/partitioning in interview even if DDL varies by warehouse.</p>
+  </div>
+</article></section><section class="category" id="advanced"><h2>Advanced</h2>
+<article class="question-card" id="q96">
+  <div class="q-header">
+    <span class="q-num">Q96</span>
+    <h3 class="q-text">Design metric: define and SQL for &#x27;engaged depositor&#x27;.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Advanced</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>-- Definition: deposited AND played 3+ days in last 7
+WITH deps AS (SELECT DISTINCT user_id FROM transactions WHERE txn_type=&#x27;deposit&#x27; AND txn_date&gt;=CURRENT_DATE-7), active AS (SELECT user_id FROM events WHERE event_date&gt;=CURRENT_DATE-7 GROUP BY user_id HAVING COUNT(DISTINCT event_date)&gt;=3) SELECT COUNT(*) FROM deps d JOIN active a ON d.user_id=a.user_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Senior signal: define metric before writing SQL.</p>
+  </div>
+</article>
+<article class="question-card" id="q97">
+  <div class="q-header">
+    <span class="q-num">Q97</span>
+    <h3 class="q-text">Multi-step: diagnose 20% DAU drop.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Advanced</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>-- Step 1: segment by platform
+SELECT platform, COUNT(DISTINCT user_id) dau FROM events WHERE event_date=CURRENT_DATE-1 GROUP BY platform;
+-- Step 2: compare to prior week same day
+-- Step 3: check new user vs returning split</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Show structured debugging approach, not just one query.</p>
+  </div>
+</article>
+<article class="question-card" id="q98">
+  <div class="q-header">
+    <span class="q-num">Q98</span>
+    <h3 class="q-text">Build a churn prediction feature table.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Advanced</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT user_id, COUNT(DISTINCT event_date) active_days_30d, SUM(amount) spend_30d, CURRENT_DATE-MAX(event_date) days_since_last FROM events WHERE event_date&gt;=CURRENT_DATE-30 GROUP BY user_id;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Feature engineering SQL for ML — ties to your churn models.</p>
+  </div>
+</article>
+<article class="question-card" id="q99">
+  <div class="q-header">
+    <span class="q-num">Q99</span>
+    <h3 class="q-text">Cross-brand Flutter analysis: users on both Junglee and Sportsbet.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Advanced</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT j.user_id FROM junglee_users j INNER JOIN sportsbet_users s ON j.email_hash=s.email_hash;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Group-level identity resolution scenario.</p>
+  </div>
+</article>
+<article class="question-card" id="q100">
+  <div class="q-header">
+    <span class="q-num">Q100</span>
+    <h3 class="q-text">Executive summary query: weekly KPI dashboard.</h3>
+  </div>
+  <div class="meta">
+    <span class="badge hard">Hard</span>
+    <span class="badge cat">Advanced</span>
+  </div>
+  <div class="answer-block">
+    <div class="label">Answer</div>
+    <pre class="sql"><code>SELECT DATE_TRUNC(&#x27;week&#x27;,CURRENT_DATE) week, (SELECT COUNT(DISTINCT user_id) FROM events WHERE event_date&gt;=CURRENT_DATE-7) wau, (SELECT SUM(amount) FROM transactions WHERE txn_type=&#x27;deposit&#x27; AND txn_date&gt;=CURRENT_DATE-7) deposits, (SELECT SUM(ngr) FROM daily_ngr WHERE day&gt;=CURRENT_DATE-7) ngr;</code></pre>
+  </div>
+  <div class="explanation-block">
+    <div class="label">Explanation</div>
+    <p>Single-row KPI summary — what you&#x27;d put in a Power BI exec dashboard.</p>
+  </div>
+</article></section>
+  <footer>100 SQL Interview Questions — Senior BC Job Prep &nbsp;|&nbsp; September 2026</footer>
+</div>
+<script>
+document.getElementById('search').addEventListener('input', function(e) {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('.question-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+  });
+});
+</script>
+</body>
+</html>
