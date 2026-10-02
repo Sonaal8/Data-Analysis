@@ -1,0 +1,191 @@
+{
+  "method": "SHAP TreeExplainer on RandomForestClassifier (80 trees). Class-1 contributions; one-hot columns summed back to the original feature. Computed on all 71,164 June holdout rows.",
+  "shap_error": "",
+  "is_shap": true,
+  "champion": "random_forest",
+  "rows_explained": 71164,
+  "top_features": [
+    {
+      "feature": "days_since_last_game",
+      "label": "Days since last game",
+      "mean_abs_shap": 0.0995067981693555,
+      "mean_shap": 0.029835334319455734
+    },
+    {
+      "feature": "days_since_last_login",
+      "label": "Days since last login",
+      "mean_abs_shap": 0.05171655870022533,
+      "mean_shap": 0.007328021706849499
+    },
+    {
+      "feature": "games_7d",
+      "label": "Games in the last 7 days",
+      "mean_abs_shap": 0.0375351184999893,
+      "mean_shap": -0.0010694778317478872
+    },
+    {
+      "feature": "active_days_7d",
+      "label": "Active days in the last 7 days",
+      "mean_abs_shap": 0.03382960577973621,
+      "mean_shap": 0.005338569773066479
+    },
+    {
+      "feature": "rake_7d",
+      "label": "Rake in the last 7 days",
+      "mean_abs_shap": 0.03379073413256145,
+      "mean_shap": -0.0016333785606078507
+    },
+    {
+      "feature": "sessions_7d",
+      "label": "Sessions in the last 7 days",
+      "mean_abs_shap": 0.022971227723474638,
+      "mean_shap": 0.0002304962205380483
+    },
+    {
+      "feature": "games_change_14d_vs_previous_14d",
+      "label": "Change in games versus the prior two weeks",
+      "mean_abs_shap": 0.017657364261893307,
+      "mean_shap": 0.004926427313534476
+    },
+    {
+      "feature": "days_since_last_withdrawal",
+      "label": "Days since last withdrawal",
+      "mean_abs_shap": 0.016052783350077034,
+      "mean_shap": -0.008408532702784558
+    },
+    {
+      "feature": "days_since_last_deposit",
+      "label": "Days since last deposit",
+      "mean_abs_shap": 0.01377213742127803,
+      "mean_shap": 0.0003809736946900488
+    },
+    {
+      "feature": "inactivity_gap_days",
+      "label": "Longest inactivity gap in 30 days",
+      "mean_abs_shap": 0.01166288721455154,
+      "mean_shap": -0.003305168650802339
+    },
+    {
+      "feature": "games_change_7d_vs_previous_7d",
+      "label": "Change in games versus the prior week",
+      "mean_abs_shap": 0.011161771324795396,
+      "mean_shap": 0.0018797623814554218
+    },
+    {
+      "feature": "withdrawal_amount_30d",
+      "label": "Withdrawals in the last 30 days",
+      "mean_abs_shap": 0.010552836147325762,
+      "mean_shap": -0.0013710841653687817
+    },
+    {
+      "feature": "games_14d",
+      "label": "Games in the last 14 days",
+      "mean_abs_shap": 0.00918861919769037,
+      "mean_shap": -0.000598201767685419
+    },
+    {
+      "feature": "rake_change_7d_vs_previous_7d",
+      "label": "Change in rake versus the prior week",
+      "mean_abs_shap": 0.008752157582890009,
+      "mean_shap": 0.0018754666907497264
+    },
+    {
+      "feature": "net_deposit_30d",
+      "label": "Net deposits in the last 30 days",
+      "mean_abs_shap": 0.008751162263136528,
+      "mean_shap": -0.0009642168518449862
+    }
+  ],
+  "permutation_top_features": [
+    {
+      "feature": "days_since_last_game",
+      "label": "Days since last game",
+      "mean_importance": 0.018815455414092908,
+      "std_importance": 0.002154239884744582
+    },
+    {
+      "feature": "games_change_14d_vs_previous_14d",
+      "label": "Change in games versus the prior two weeks",
+      "mean_importance": 0.012884163359788777,
+      "std_importance": 0.0008012954386522345
+    },
+    {
+      "feature": "rake_7d",
+      "label": "Rake in the last 7 days",
+      "mean_importance": 0.012566723912979508,
+      "std_importance": 0.0015660435717977273
+    },
+    {
+      "feature": "days_since_last_deposit",
+      "label": "Days since last deposit",
+      "mean_importance": 0.011509486319163265,
+      "std_importance": 0.0021885110908688855
+    },
+    {
+      "feature": "active_days_7d",
+      "label": "Active days in the last 7 days",
+      "mean_importance": 0.010533359475996762,
+      "std_importance": 0.004595388355005882
+    },
+    {
+      "feature": "deposit_decline_flag",
+      "label": "Deposit-decline flag",
+      "mean_importance": 0.00801739251210796,
+      "std_importance": 0.002468594234857522
+    },
+    {
+      "feature": "days_since_last_login",
+      "label": "Days since last login",
+      "mean_importance": 0.008013253337662637,
+      "std_importance": 0.0032327286390154853
+    },
+    {
+      "feature": "deposit_change_7d_vs_previous_7d",
+      "label": "Change in deposits versus the prior week",
+      "mean_importance": 0.004860113034291846,
+      "std_importance": 0.003925026770144124
+    },
+    {
+      "feature": "games_30d",
+      "label": "Games in the last 30 days",
+      "mean_importance": 0.004746784399312994,
+      "std_importance": 0.0011759893997389482
+    },
+    {
+      "feature": "total_entry_fee",
+      "label": "Total entry fees in the last 30 days",
+      "mean_importance": 0.003993464562776217,
+      "std_importance": 0.001527728098355445
+    },
+    {
+      "feature": "sessions_30d",
+      "label": "Sessions in the last 30 days",
+      "mean_importance": 0.0038858684696766455,
+      "std_importance": 0.001479950700817104
+    },
+    {
+      "feature": "days_since_last_withdrawal",
+      "label": "Days since last withdrawal",
+      "mean_importance": 0.0036297786655161146,
+      "std_importance": 0.0004885528491370046
+    },
+    {
+      "feature": "lifetime_rake",
+      "label": "Lifetime rake",
+      "mean_importance": 0.003326439411237355,
+      "std_importance": 0.001697860830376065
+    },
+    {
+      "feature": "lifetime_deposit",
+      "label": "Lifetime deposits",
+      "mean_importance": 0.0032805932158758524,
+      "std_importance": 0.00028491834327889413
+    },
+    {
+      "feature": "game_frequency_std",
+      "label": "Volatility of daily game counts",
+      "mean_importance": 0.003047492170710875,
+      "std_importance": 0.0024720466123259073
+    }
+  ]
+}

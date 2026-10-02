@@ -1,0 +1,71 @@
+# Player Churn Prediction & Retention Intelligence System
+# All paths are relative to the project root. No absolute paths.
+
+seed: 42
+n_users: 100000
+chunk_size: 20000
+
+calendar:
+  registration_start: "2024-06-01"
+  registration_end: "2025-06-05" # inclusive upper bound used by the generator
+  history_start: "2024-06-01"
+  detail_start: "2025-03-01"
+  data_end: "2025-07-14" # inclusive last event date
+
+# Scoring snapshots. Features use dates strictly before prediction_date.
+# The label window is [prediction_date, prediction_date + label_days).
+prediction_dates:
+  train: "2025-04-15"
+  valid: "2025-05-15"
+  test: "2025-06-15"
+
+windows:
+  feature_days: 30
+  label_days: 30
+
+# Operating bands for CRM routing. These are policy choices, not universal optima.
+# A separate probability threshold is tuned on the validation snapshot for F-beta.
+risk_bands:
+  medium: 0.20
+  high: 0.40
+  critical: 0.65
+
+# Decline flags. Kept aligned with sql/05_player_features.sql.
+decline_rules:
+  min_previous_games: 3
+  games_ratio: 0.6
+  min_previous_deposit: 100
+  deposit_ratio: 0.6
+  min_previous_sessions: 2
+  session_ratio: 0.6
+  withdrawal_to_deposit_ratio: 0.8
+
+retention:
+  high_value_vip:
+    - Gold
+    - Platinum
+    - Diamond
+  high_value_rake_quantile: 0.75
+  recent_withdrawal_days: 7
+  low_activity_active_days_max: 3
+  low_activity_games_quantile: 0.40
+
+model:
+  # Search runs on a stratified subsample; the champion is refit on all training rows.
+  search_sample_size: 35000
+  cv_folds: 3
+  threshold_beta: 1.5
+  contact_rates: [0.05, 0.10, 0.20]
+  random_state: 42
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  sample_dir: data/samples
+  models_dir: models
+  reports_dir: reports
+  figures_dir: reports/figures
+  metrics_dir: reports/model_metrics
+  scores_dir: reports/scores
+  aggregates_dir: reports/aggregates
+  sql_dir: sql

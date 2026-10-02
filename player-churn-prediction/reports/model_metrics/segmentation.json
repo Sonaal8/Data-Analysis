@@ -1,0 +1,46 @@
+{
+  "k": 4,
+  "silhouette": [
+    {
+      "k": 4,
+      "silhouette": 0.29336688173032377
+    },
+    {
+      "k": 5,
+      "silhouette": 0.20988882909184842
+    },
+    {
+      "k": 6,
+      "silhouette": 0.22628551632477692
+    },
+    {
+      "k": 7,
+      "silhouette": 0.24171957123886606
+    },
+    {
+      "k": 8,
+      "silhouette": 0.24531781781977186
+    }
+  ],
+  "names": {
+    "2": "Promotion Sensitive",
+    "3": "High Value\u2013High Engagement",
+    "0": "Dormant/Reactivation",
+    "1": "Low Value\u2013High Engagement"
+  },
+  "features": [
+    "games_30d",
+    "active_days_30d",
+    "sessions_30d",
+    "days_since_last_game",
+    "games_change_7d_vs_previous_7d",
+    "deposit_amount_30d",
+    "lifetime_rake",
+    "player_tenure_days",
+    "bonus_dependency_ratio",
+    "rake_30d",
+    "inactivity_gap_days"
+  ],
+  "fit_on": "train snapshot only; June is assigned with those centroids",
+  "why_kmeans": "Segments are a compression of continuous behavior for CRM routing. K-means is appropriate once features are scaled, because the inputs are numeric and the goal is a small set of operational groups rather than a generative mixture. Silhouette on a sample chooses K in 4\u20138."
+}

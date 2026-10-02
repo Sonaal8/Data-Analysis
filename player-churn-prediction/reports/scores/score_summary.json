@@ -1,0 +1,19 @@
+{
+  "prediction_date": "2025-06-15",
+  "players": 71164,
+  "average_churn_probability": 0.5294163355913134,
+  "holdout_churn_rate": 0.21638749929739756,
+  "risk_band_counts": {
+    "CRITICAL": 28927,
+    "MEDIUM": 21872,
+    "LOW": 14821,
+    "HIGH": 5544
+  },
+  "risk_band_thresholds": {
+    "medium": 0.2,
+    "high": 0.4,
+    "critical": 0.65
+  },
+  "model": "random_forest",
+  "note": "churned_holdout is known only because this file is a backtest. A live scoring run would not contain it."
+}

@@ -1,0 +1,91 @@
+{
+  "reference": "April train snapshot",
+  "actual": "June test snapshot",
+  "feature_psi": [
+    {
+      "feature": "days_since_last_game",
+      "psi_april_vs_june": 0.4119865775692869,
+      "april_mean": 4.077071052513162,
+      "june_mean": 7.375906357146872
+    },
+    {
+      "feature": "games_change_7d_vs_previous_7d",
+      "psi_april_vs_june": 0.36535238162092004,
+      "april_mean": 2.4702243191000415,
+      "june_mean": 0.9644546133594072
+    },
+    {
+      "feature": "games_7d",
+      "psi_april_vs_june": 0.282846099454745,
+      "april_mean": 10.284401295954641,
+      "june_mean": 6.573365746725873
+    },
+    {
+      "feature": "lifetime_rake",
+      "psi_april_vs_june": 0.15101922136606327,
+      "april_mean": 1493.4425363362284,
+      "june_mean": 2251.8069928615587
+    },
+    {
+      "feature": "deposit_change_7d_vs_previous_7d",
+      "psi_april_vs_june": 0.0556318557215084,
+      "april_mean": 225.36998761060502,
+      "june_mean": 123.63006817404866
+    },
+    {
+      "feature": "bonus_dependency_ratio",
+      "psi_april_vs_june": 0.04566156938778158,
+      "april_mean": 0.08201870494947397,
+      "june_mean": 0.03887509516070857
+    },
+    {
+      "feature": "inactivity_gap_days",
+      "psi_april_vs_june": 0.03952855710525098,
+      "april_mean": 12.842573009944651,
+      "june_mean": 12.342265752346693
+    },
+    {
+      "feature": "sessions_30d",
+      "psi_april_vs_june": 0.0018581936111141861,
+      "april_mean": 6.910644377446789,
+      "june_mean": 6.918146815805745
+    },
+    {
+      "feature": "active_days_30d",
+      "psi_april_vs_june": 0.0015208685061825168,
+      "april_mean": 5.738671646492373,
+      "june_mean": 5.691683997526839
+    },
+    {
+      "feature": "games_30d",
+      "psi_april_vs_june": 0.0010886658648654626,
+      "april_mean": 33.79205102821401,
+      "june_mean": 33.97608341296161
+    },
+    {
+      "feature": "rake_30d",
+      "psi_april_vs_june": 0.0006152425910912064,
+      "april_mean": 399.6471900733475,
+      "june_mean": 400.44454429205786
+    },
+    {
+      "feature": "deposit_amount_30d",
+      "psi_april_vs_june": 0.00019235764810855908,
+      "april_mean": 953.8991675291367,
+      "june_mean": 955.0210695014331
+    }
+  ],
+  "max_feature_psi": 0.4119865775692869,
+  "score_psi_may_vs_june": 0.29545044357921946,
+  "simulation": {
+    "description": "June engagement and rake features multiplied by 0.7; recency and inactivity gap increased. Labels are not changed. The alert is the movement in scores.",
+    "score_psi": 0.4624268980107816,
+    "mean_score_before": 0.5294163355913134,
+    "mean_score_after": 0.6150339155595486
+  },
+  "thresholds": {
+    "psi_watch": 0.1,
+    "psi_act": 0.25,
+    "note": "These are operating guidelines, not statistical laws."
+  }
+}

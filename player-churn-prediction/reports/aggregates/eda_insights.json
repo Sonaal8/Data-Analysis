@@ -1,0 +1,152 @@
+{
+  "holdout_players": 71164,
+  "holdout_churn_rate": 0.21638749929739756,
+  "vip": {
+    "highest": {
+      "vip_segment": "Silver",
+      "churn_rate": 0.2615083251714006,
+      "players": 7147
+    },
+    "lowest": {
+      "vip_segment": "Diamond",
+      "churn_rate": 0.18900043649061546,
+      "players": 2291
+    }
+  },
+  "channel": {
+    "highest": {
+      "acquisition_channel": "Affiliate",
+      "churn_rate": 0.2651136993899057,
+      "players": 7212
+    },
+    "lowest": {
+      "acquisition_channel": "Referral",
+      "churn_rate": 0.18509047993705743,
+      "players": 10168
+    }
+  },
+  "device": {
+    "highest": {
+      "device_type": "iOS",
+      "churn_rate": 0.21913777664065498,
+      "players": 15634
+    },
+    "lowest": {
+      "device_type": "Android",
+      "churn_rate": 0.21524460550156482,
+      "players": 48568
+    }
+  },
+  "game_type": {
+    "highest": {
+      "preferred_game_type": "Deals Rummy",
+      "churn_rate": 0.2415898406496123,
+      "players": 16379
+    },
+    "lowest": {
+      "preferred_game_type": "Points Rummy",
+      "churn_rate": 0.19165659008464328,
+      "players": 26464
+    }
+  },
+  "tenure": {
+    "highest": {
+      "tenure_bucket": "0-30",
+      "churn_rate": 0.24667822068168688,
+      "players": 1731
+    },
+    "lowest": {
+      "tenure_bucket": "181-365",
+      "churn_rate": 0.2084826183790065,
+      "players": 30981
+    }
+  },
+  "games": {
+    "highest": {
+      "games_bucket": "1-5",
+      "churn_rate": 0.3458004191520232,
+      "players": 6203
+    },
+    "lowest": {
+      "games_bucket": "41-80",
+      "churn_rate": 0.11129803900951579,
+      "players": 19021
+    }
+  },
+  "deposit": {
+    "highest": {
+      "deposit_bucket": "None",
+      "churn_rate": 0.2782864617396992,
+      "players": 27522
+    },
+    "lowest": {
+      "deposit_bucket": "2000+",
+      "churn_rate": 0.16251997260899337,
+      "players": 8762
+    }
+  },
+  "withdrawal": {
+    "highest": {
+      "withdrawal_bucket": "1000+",
+      "churn_rate": 0.22080648664301744,
+      "players": 13813
+    },
+    "lowest": {
+      "withdrawal_bucket": "101-1000",
+      "churn_rate": 0.21204188481675393,
+      "players": 382
+    }
+  },
+  "recency": {
+    "highest": {
+      "recency_bucket": "15-30",
+      "churn_rate": 0.417264862875023,
+      "players": 10866
+    },
+    "lowest": {
+      "recency_bucket": "0-1",
+      "churn_rate": 0.09620700245700246,
+      "players": 13024
+    }
+  },
+  "sessions": {
+    "highest": {
+      "session_bucket": "1-3",
+      "churn_rate": 0.33959500764136524,
+      "players": 15704
+    },
+    "lowest": {
+      "session_bucket": "11-14",
+      "churn_rate": 0.10849587396849213,
+      "players": 10664
+    }
+  },
+  "activity_decline": [
+    {
+      "activity_decline_flag": 1,
+      "players": 24573,
+      "churn_rate": 0.2476702071379156
+    },
+    {
+      "activity_decline_flag": 0,
+      "players": 46591,
+      "churn_rate": 0.19988839046167714
+    }
+  ],
+  "value": {
+    "highest": {
+      "value_bucket": "Q1 low rake",
+      "churn_rate": 0.2768253611376539,
+      "players": 17791
+    },
+    "lowest": {
+      "value_bucket": "Q3",
+      "churn_rate": 0.16390309707155304,
+      "players": 17791
+    }
+  },
+  "corr_days_since_last_game": 0.2915822358551694,
+  "corr_games_30d": -0.16245013527914753,
+  "corr_games_change": -0.09703719539660267,
+  "corr_active_days_30d": -0.19990697092187457
+}
